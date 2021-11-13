@@ -33,7 +33,7 @@ namespace PseudoTopDown3D
             {
                 layers.Add(new Color[Width, Height]);
             }
-            FastNoiseLite noise = new(124489);
+            FastNoiseLite noise = new(new Random().Next());
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFrequency(0.01f);
             noise.SetFractalType(FastNoiseLite.FractalType.None);
@@ -83,19 +83,26 @@ namespace PseudoTopDown3D
                 {
                     for (int y = 0; y < Height; y++)
                     {
-                        byte val = (byte)((byte)(noise.GetNoise(x + xOffset, y - yOffset, zOffset) * maxHeight));
+                        float noiseVal = noise.GetNoise(x + xOffset, y - yOffset, zOffset);
+                        noiseVal += 1;
+                        noiseVal /= 2;
+                        byte val = (byte)(noiseVal * maxHeight);
 
                         for (int l = 0; l < maxHeight; l++)
                         {
-                            if (l == val)
+                            if (l <= val & l > maxHeight / 2)
                             {
                                 layers[l][x, y] = new Color((byte)(l), (byte)(l), 0, 255);
                             }
+                            else if (l <= val & l < maxHeight / 2)
+                            {
+                                layers[l][x, y] = new(0, 0, 255, 1);
+                            }
                             else
                             {
-                                layers[l][x, y] = new(0,0,255,0);
+                                layers[l][x, y] = Color.Transparent;
                             }
-                            
+
                         }
                     }
                 }
@@ -132,7 +139,7 @@ namespace PseudoTopDown3D
                 Texture layerTexture = new(Width, Height);
                 layerTexture.Update(pixels);
                 Sprite layerSprite = new(layerTexture);
-                double multiplyer = 1;
+                double multiplyer = 2;
                 float scalator = ((float)l / (float)maxHeight * (float)multiplyer + (float)1);
                 layerSprite.Scale = new(scale * scalator, scale * scalator);
                 float posOffsetX = scale * (scalator - 1) / 2 * -Width;
