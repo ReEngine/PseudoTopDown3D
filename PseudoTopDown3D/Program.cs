@@ -18,9 +18,6 @@ namespace PseudoTopDown3D
         static readonly byte[] pixels = new byte[Width * Height * 4];
         static readonly Color[] cpixels = new Color[Width * Height];
 
-        static int xOffset = 0;
-        static int yOffset = 0;
-        static float zOffset = 0;
         static readonly byte maxHeight = 1;
         static readonly Texture MainViewPort = new(Width, Height);
 
@@ -51,28 +48,7 @@ namespace PseudoTopDown3D
                 {
                     window.Close();
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-                {
-                    yOffset++;
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-                {
-                    xOffset--;
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.S))
-                {
-                    yOffset--;
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-                {
-                    xOffset++;
-                }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
-                {
-                    zOffset += 0.1f;
-                }
 
-                
                 window.Clear();
                 window.Draw(sprite);
 
