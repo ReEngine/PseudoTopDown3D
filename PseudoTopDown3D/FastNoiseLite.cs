@@ -153,7 +153,7 @@ namespace PseudoTopDown3D
         {
             SetSeed(seed);
         }
-        
+
 
         /// <summary>
         /// Sets seed used for all noise types
