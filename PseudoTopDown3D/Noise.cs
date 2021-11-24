@@ -25,7 +25,7 @@ namespace PseudoTopDown3D
             noise.SetCellularJitter(1);
 
 
-            float[,] FOM = FalloffGenerator.GenerateFallOffMap(900);
+            float[,] FOM = FalloffGenerator.GenerateFallOffMap((int)MathF.Max(mapWidth,mapHeight));
             float[,] noiseMap = new float[mapWidth, mapHeight];
 
             float min = 1000;
