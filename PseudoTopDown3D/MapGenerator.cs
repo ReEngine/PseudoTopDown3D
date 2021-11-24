@@ -11,8 +11,7 @@ namespace PseudoTopDown3D
     {
         private readonly uint width;
         private readonly uint height;
-        private readonly float frequency;
-
+        public float[,] heightMap;
 
 
         public uint Width { get => width; }
@@ -23,31 +22,72 @@ namespace PseudoTopDown3D
         {
             this.width = x;
             this.height = y;
-            this.frequency = frequency;
-            Noise.GenerateNoiseMap(width, height, frequency);
+            this.heightMap = Noise.GenerateNoiseMap(width, height, frequency);
         }
 
 
-        public Texture GenerateMap()
+        public Color[,] GenerateColorMap()
         {
-            float[,] noiseMap = Noise.GenerateNoiseMap(width, height, frequency);
-            byte[] result = new byte[width * height * 4];
+             Color[,] result = new Color[width, height];
             for (uint x = 0; x < width; x++)
             {
                 for (uint y = 0; y < height; y++)
                 {
-                    uint i = 4 * (x + (Width * y));
-                    result[i] = (byte)(noiseMap[x, y] * 255);
-                    result[i + 1] = (byte)(noiseMap[x, y] * 255);
-                    result[i + 2] = (byte)(noiseMap[x, y] * 255);
-                    result[i + 3] = (byte)(255);
+                    byte value = (byte)(this.heightMap[x, y] );
+                    Color color;
+                    if (value < 10)
+                    {
+                        color = new Color(0, 0, 255);
+                    }
+                    else if (value < 20)
+                    {
+                        color = new Color(255, 229, 50);
+                    }
+                    else if (value < 30)
+                    {
+                        color = new Color(76, 177, 12);
+                    }
+                    else if (value < 40)
+                    {
+                        color = new Color(46, 127, 10);
+                    }
+                    else if (value < 50)
+                    {
+                        color = new Color(28, 103, 11);
+                    }
+                    else if (value < 60)
+                    {
+                        color = new Color(103, 64, 17);
+                    }
+                    else if (value < 74)
+                    {
+                        color = new Color(74, 56, 33);
+                    }
+                    else if (value < 82)
+                    {
+                        color = new Color(85, 70, 51);
+                    }
+                    else if (value < 90)
+                    {
+                        color = new Color(89, 89, 89);
+                    }
+                    else if (value < 95)
+                    {
+                        color = new Color(113, 113, 113);
+                    }
+                    else
+                    {
+                        color = new Color(255, 255, 255);
+                    }
+
+
+                    result[x, y] = color;
                 }
             }
-            Texture texture = new(width, height);
-            texture.Update(result);
+            
 
 
-            return texture;
+            return result;
         }
 
     }
