@@ -44,7 +44,7 @@ namespace PseudoTopDown3D
                     {
                         max = perlinValue;
                     }
-                    noiseMap[x, y] = (1 - FOM[x, y]) * 100 * Math.Clamp(Map(perlinValue, -0.5f, -0.19f, -1, 0) + 1, 0, 1);
+                    noiseMap[x, y] = (1 - FOM[x, y]) * 255 * Math.Clamp(Map(perlinValue, -0.5f, -0.19f, -1, 0) + 1, 0, 1);
                 }
             }
             Console.WriteLine("Max = " + max + "\nMin = " + min);
