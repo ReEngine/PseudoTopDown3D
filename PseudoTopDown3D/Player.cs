@@ -17,7 +17,7 @@ namespace PseudoTopDown3D
         {
             Position = new Vector2f(0, 0);
             Angle = MathF.PI / 4;
-            Height = 256;
+            Height = 128;
             Pitch = 90;
             turningVel = 0.1f;
             Velocity = 10;
@@ -25,7 +25,6 @@ namespace PseudoTopDown3D
 
         public void Update()
         {
-
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
                 pitch += Velocity;
@@ -43,6 +42,9 @@ namespace PseudoTopDown3D
             {
                 angle += turningVel;
             }
+
+
+
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Q))
             {

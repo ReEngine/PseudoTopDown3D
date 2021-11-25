@@ -14,7 +14,7 @@ namespace PseudoTopDown3D
 
         public static void Main()
         {
-            MapGenerator mapGenerator = new(900, 900, 0.008f);
+            MapGenerator mapGenerator = new(1600, 1600, 0.008f);
             Color[,] colorMap = mapGenerator.GenerateColorMap();
             float[,] heightMap = mapGenerator.heightMap;
             Player player = new();
